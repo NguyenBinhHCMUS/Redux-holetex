@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Todo from "../Todo";
 import { addTodo } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
-import { searchTextSelector, todoListSelector } from "../../redux/selectors";
+import {
+  searchTextSelector,
+  todoListSelector,
+  todosReminingSelector,
+} from "../../redux/selectors";
 
 export default function TodoList() {
   const dispatch = useDispatch();
@@ -12,8 +16,7 @@ export default function TodoList() {
   const [todoName, setTodoName] = useState("");
   const [priority, setPriority] = useState("Medium");
 
-  const todoListData = useSelector(todoListSelector);
-  const searchText = useSelector(searchTextSelector);
+  const todoListData = useSelector(todosReminingSelector);
 
   const handleAddButtonClick = () => {
     dispatch(
@@ -39,7 +42,13 @@ export default function TodoList() {
     <Row style={{ height: "calc(100% - 40px)" }}>
       <Col span={24} style={{ height: "calc(100% - 40px)", overflowY: "auto" }}>
         {todoListData.map((item, index) => (
-          <Todo key={index} name={item.name} priority={item.priority} />
+          <Todo
+            key={index}
+            id={item.id}
+            name={item.name}
+            completed={item.completed}
+            priority={item.priority}
+          />
         ))}
       </Col>
       <Col span={24}>
