@@ -5,7 +5,7 @@ import Filters from "./components/Filters";
 
 const { Title } = Typography;
 
-function App() {
+export function App() {
   return (
     <div
       style={{
